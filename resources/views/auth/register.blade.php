@@ -1,7 +1,32 @@
-<x-guest-layout>
-    <div class="w-full">
-        <h1 class="text-3xl font-bold mb-2 text-black">Create account</h1>
-        <p class="text-gray-600 mb-8">Join EMS to manage your workforce effectively</p>
+<x-auth-layout>
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-black mb-2">Create account</h1>
+    <p class="text-gray-600">Join EMS to manage your workforce effectively</p>
+</div>
+<form method="POST" action="{{ route('register') }}" class="space-y-5">
+    @csrf
+    <div>
+        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+        <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-200">
+    </div>
+    <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+        <input id="email" type="email" name="email" value="{{ old('email') }}" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-200">
+    </div>
+    <div>
+        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+        <input id="password" type="password" name="password" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-200">
+    </div>
+    <div>
+        <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+        <input id="password_confirmation" type="password" name="password_confirmation" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-200">
+    </div>
+    <button type="submit" class="w-full py-2 px-4 bg-orange-600 text-white font-bold rounded-lg shadow hover:bg-orange-700 transition">Create account</button>
+</form>
+<div class="mt-6 text-center text-sm text-gray-600">
+    Already have an account? <a href="{{ route('login') }}" class="text-orange-500 hover:text-orange-600 font-semibold">Sign in</a>
+</div>
+</x-guest-layout>
 
         <form method="POST" action="{{ route('register') }}" class="space-y-6">
             @csrf

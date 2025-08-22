@@ -10,27 +10,23 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen flex">
-            <!-- Left side - Form -->
-            <div class="w-full lg:w-1/2 flex flex-col justify-center items-center p-8 bg-white">
-                <div class="w-full max-w-md">
-                    <div class="flex justify-between items-center mb-8">
-                        <a href="/" class="flex items-center">
-                            <img src="{{ asset('assets/img/Logo2.png') }}" alt="Logo" class="h-12 w-auto">
-                            <span class="text-2xl font-bold text-black ml-2">EMS</span>
-                        </a>
-                        @if(Route::has('register'))
-                            <div class="text-sm text-gray-600">
-                                Already have an account? <a href="{{ route('login') }}" class="text-orange-500 hover:text-orange-600 font-semibold">Sign in</a>
-                            </div>
-                        @endif
+    <body class="font-sans antialiased bg-gray-50">
+        <div class="min-h-screen flex flex-col justify-center items-center">
+            <div class="flex flex-col md:flex-row w-full max-w-4xl bg-white shadow-xl rounded-xl overflow-hidden">
+                <!-- Left: Logo & Form -->
+                <div class="flex-1 flex flex-col justify-center items-center p-8">
+                    <div class="flex flex-col items-center mb-6">
+                        <img src="{{ asset('assets/img/logo.png') }}" alt="EMS Logo" class="h-24 mb-2">
+                        <span class="text-2xl font-extrabold text-orange-600 tracking-wide">EMS</span>
                     </div>
-                    {{ $slot }}
+                    <div class="w-full max-w-md">
+                        @yield('content')
                 </div>
             </div>
             
