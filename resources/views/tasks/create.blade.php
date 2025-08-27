@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="container mt-4">
-    <h2 class="fw-bold text-primary"><i class="bi bi-clipboard-check"></i>Create Task</h2>
+    <h2 class="fw-bold text-primary"> Create Task</h2>
 
     @if ($errors->any())
         <div class="alert alert-danger">
