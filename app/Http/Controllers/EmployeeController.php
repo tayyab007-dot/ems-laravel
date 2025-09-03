@@ -20,36 +20,7 @@ class EmployeeController extends Controller
     {
         return view('employees.create'); // This should match the blade file you'll create
     }
-    // public function addEmployee(Request $req)
-    // {
-
-    //     $req->validate([
-    //         'name' => 'required',
-    //         'email' => 'required|email|unique:users,email',
-    //         'password' => 'required|min:6',
-    //         'job_title' => 'required',
-    //         'experties' => 'required',
-    //         'job_contract_type' => 'required',
-    //     ]);
-
-    //      // Create user
-    //     $user = User::create([
-    //         'name' => $req->name,
-    //         'email' => $req->email,
-    //         'password' => Hash::make($req->password),
-    //     ]);
-
-    //     //Create employee
-    //     Employee::create([
-    //         'user_id' => 'user_id',
-    //         'job_title' => $req->job_title,
-    //         'experties' => $req->experties,
-    //         'job_contract_type' => $req->job_contract_type,
-    //     ]);
-    //         return redirect()->route('employees.index')->with('success','Employee added successfully');
-
-    // }
-
+   
     public function store(Request $req)
     {
         $req->validate([
@@ -100,18 +71,45 @@ class EmployeeController extends Controller
             'job_contract_type' => 'required',
            
         ]);
+
+         $employee->update([
+            'job_title' => $req->job_title,
+            'experties' => $req->experties,
+            'job_contract_type' => $req->job_contract_type,
+        ]);
+        
         $employee->update($req->all());
         return redirect()->route('employees.index')->with('success','employee added successfully');
     }
 
-    public function destroy(int $id){
+    // public function destroy(int $id){
        
-        $employee = Employee::find($id);
+    //     $employee = Employee::find($id);
         
+    //     $employee->delete();
+    //     // Employee::destroy($id);
+    //     // Employee::destroy(6,8);
+        
+    //     return redirect()->route('employees.index')->with('status','employee deleted successfully');
+    // }
+
+    public function destroy(int $id)
+{
+    $employee = Employee::find($id);
+    
+    if ($employee) {
+        // Get the user before deleting the employee
+        $user = $employee->user;
+        
+        // Delete the employee (using soft delete if implemented)
         $employee->delete();
-        // Employee::destroy($id);
-        // Employee::destroy(6,8);
         
-        return redirect()->route('employees.index')->with('status','employee deleted successfully');
+        // If you want to completely remove user access, also delete the user
+        if ($user) {
+            $user->delete();
+        }
     }
+    
+    return redirect()->route('employees.index')->with('status', 'Employee deleted successfully');
+}
 }

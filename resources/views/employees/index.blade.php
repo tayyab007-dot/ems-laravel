@@ -81,3 +81,21 @@
     .table-hover tbody tr:hover { background-color: #f8fbff; transition: 0.2s; }
 </style>
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

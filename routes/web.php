@@ -31,6 +31,7 @@ Route::post('/add-manager', [ManagerController::class, 'store'])->name('addManag
 Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
 Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
 Route::post('/add-employee', action: [EmployeeController::class, 'store'])->name('employees.store');
+// Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit')->
 Route::delete('/employee/{id}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
 
 // Tasks Assign
