@@ -56,18 +56,30 @@
                                 <td><span class="badge bg-warning  text-dark">{{ $employee->job_contract_type }}</span></td>
                                 @role('manager')
                                     <td>
-                                        <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" 
-                                              class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" 
-                                                    class="btn btn-sm btn-outline-danger"
-                                                    onclick="return confirm('Are you sure?')">
-                                                <i class="bi bi-trash3"></i> Delete
-                                            </button>
-                                        </form>
+                                        <div class="d-flex gap-2">
+                                            <a href="{{ route('employees.edit', $employee->id) }}" 
+                                               class="btn btn-sm btn-outline-primary px-2 py-1">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" 
+                                                  class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" 
+                                                        class="btn btn-sm btn-outline-danger px-2 py-1"
+                                                        onclick="return confirm('Are you sure?')">
+                                                    <i class="bi bi-trash3"></i>
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 @endrole
+
+<style>
+    .btn-outline-primary:hover {
+        border-color: transparent;
+    }
+</style>
                             </tr>
                         @endforeach
                     </tbody>

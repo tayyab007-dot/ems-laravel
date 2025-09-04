@@ -61,26 +61,37 @@ class EmployeeController extends Controller
         return view('employees.edit', compact('employee'));
     }
    
-    public function update(Request $req, Employee $employee){
-        $req->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'job_title' => 'required',
-            'experties' => 'required',
-            'job_contract_type' => 'required',
-           
-        ]);
+    public function update(Request $req, Employee $employee)
+{
+    $req->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users,email,'.$employee->user_id,
+        'password' => 'nullable|min:6',
+        'job_title' => 'required',
+        'experties' => 'required',
+        'job_contract_type' => 'required',
+    ]);
 
-         $employee->update([
-            'job_title' => $req->job_title,
-            'experties' => $req->experties,
-            'job_contract_type' => $req->job_contract_type,
-        ]);
-        
-        $employee->update($req->all());
-        return redirect()->route('employees.index')->with('success','employee added successfully');
+    // Update user
+    $user = $employee->user;
+    $user->name = $req->name;
+    $user->email = $req->email;
+    
+    if ($req->password) {
+        $user->password = Hash::make($req->password);
     }
+    
+    $user->save();
+
+    // Update employee
+    $employee->update([
+        'job_title' => $req->job_title,
+        'experties' => $req->experties,
+        'job_contract_type' => $req->job_contract_type,
+    ]);
+    
+    return redirect()->route('employees.index')->with('success','Employee updated successfully');
+}
 
     // public function destroy(int $id){
        
