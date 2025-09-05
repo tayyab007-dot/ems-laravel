@@ -74,6 +74,14 @@
                                                 </button>
                                             </form>
                                         @endcan
+
+                                         @if($task->status === 'pending')
+                                        @can('update tasks')
+                                            <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-outline-primary">
+                                                Edit Task
+                                            </a>
+                                        @endcan
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -93,7 +101,6 @@
 
 
 {{-- 
-
 @extends('layouts.app')
 
 @section('content')

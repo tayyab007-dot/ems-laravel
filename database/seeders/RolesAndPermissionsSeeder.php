@@ -183,6 +183,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'assign tasks',
             'view tasks',
             'update task status', // Changed to singular 'task'
+            'update tasks', // Added missing permission
             'delete tasks'
         ];
 

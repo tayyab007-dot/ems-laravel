@@ -91,6 +91,35 @@ abort(403);
 
     }
 
+    public function edit(Task $task)
+    {
+        // Check if user is manager
+    if (!auth()->user()->hasRole('manager')) {
+        abort(403);
+    }
+        return view('tasks.edit', compact('task'));
+    }
+
+    public function update(Request $request, Task $task){
+        // Check if user is manager
+    if (!auth()->user()->hasRole('manager')) {
+        abort(403);
+    }
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required',
+            'due_date' => 'nullable|date',
+        ]);
+
+        $task->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'due_date' => $request->due_date,
+        ]);
+
+        return redirect()->route('tasks.index')->with('success', 'Task updated successfully!');
+    }
+
     public function destroy(Task $task)
     {
         $task->delete();
