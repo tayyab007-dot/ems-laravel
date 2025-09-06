@@ -23,6 +23,7 @@
   </div>
 </div>
 
+@role('manager')
 <div class="row g-4">
 
   <div class="col-md-6 col-lg-3">
@@ -106,6 +107,7 @@
   </div>
 
 </div>
+@endrole
 
 <style>
 .stat-title {
